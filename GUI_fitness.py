@@ -1,9 +1,8 @@
 import tkinter as tk
-import fitness_num_entry as numy
 from tkinter import *
 from datetime import datetime
 
-
+current_date_and_time = datetime.now(tz = None)
 def main():
     # Create the Tk root object.
     root = tk.Tk()
@@ -102,20 +101,6 @@ def basal_metabolic_rate(gender, weight, height, age):
     return bmr
 
 
-# The controls in a graphical user interface (GUI) are called widgets,
-# and each widget is an object. Because a GUI has many widgets and each
-# widget is an object, the code to make a GUI usually has many variables
-# to store the many objects. Because there are so many variable names,
-# programmers often adopt a naming convention to help a programmer keep
-# track of all the variables. One popular naming convention is to type a
-# three letter prefix in front of the names of all variables that store
-# GUI widgets, according to this list:
-#
-# frm: a frame (window) widget
-# lbl: a label widget that displays text for the user to see
-# ent: an entry widget where a user will type text or numbers
-# btn: a button widget that the user will click
-
 
 def main_window(frm_main):
     """Populate the main window of this program. In other words, put
@@ -135,9 +120,9 @@ def main_window(frm_main):
     ent_gender = Entry(frm_main, width=5)
     ent_birthday = Entry(frm_main, width=10)
     ent_weight_pounds = Entry(frm_main, width=5)
-    ent_height_inches = numy.IntEntry(frm_main, 1, 90, width=5)
+    ent_height_inches = Entry(frm_main, width=5)
 
-     # Create a label that displays "Weight in pounds:"
+     # Create a label that displays "age, weight, height, bmi, and bmr."
     lbl_age_text = tk.Label(frm_main, text="Age (years):")
     lbl_kg_text = tk.Label(frm_main, text="Weight (kg):")
     lbl_cm_text = tk.Label(frm_main, text="Height (cm):")
@@ -150,6 +135,7 @@ def main_window(frm_main):
     the_height_inches = tk.Label(frm_main, width=4)
     the_kg = tk.Label(frm_main, width=4)
     the_cm = tk.Label(frm_main, width=4)
+    the_time = tk.Label(frm_main, width=20)
     
 
 
@@ -177,10 +163,10 @@ def main_window(frm_main):
     the_height_inches.grid(row=4, column=3, padx=(30,3), pady=3)
     the_kg.grid(row=1, column=3, padx=(30,3), pady=3)
     the_cm.grid(row=2, column=3, padx=(30,3), pady=3)
-    
+    the_time.grid(row=6, column=0, padx=(30,3), pady=3)
 
 
-    btn_clear.grid(row=4, column=0, padx=3, pady=3, columnspan=5, sticky="W")
+    btn_clear.grid(row=7, column=0, padx=3, pady=3, columnspan=5, sticky="W")
 
     def calc(event):
 
@@ -188,7 +174,7 @@ def main_window(frm_main):
             gender = ent_gender.get().upper()
             birthdate = ent_birthday.get()
             weight_in_pounds = int(ent_weight_pounds.get())
-            height_in_inches = ent_height_inches.get()
+            height_in_inches = int(ent_height_inches.get())
 
             age = compute_age(birthdate)
             kg = kg_from_lb(weight_in_pounds)
@@ -201,6 +187,7 @@ def main_window(frm_main):
             the_cm.config(text=f"{cm:.1f}")
             the_weight_pounds.config(text=f"{bmi:.1f}")
             the_height_inches.config(text=f"{bmr:.0f}")
+            the_time.config(text=f"{current_date_and_time:%a %b %w %X %Y}")
 
         except ValueError:
             the_birthday.config(text="")
@@ -223,13 +210,14 @@ def main_window(frm_main):
         the_height_inches.config(text="")
         the_kg.config(text="")
         the_cm.config(text="")
+        the_time.config(text="")
         ent_birthday.focus()
         ent_gender.focus()
         ent_weight_pounds.focus()
         ent_height_inches.focus()
 
 
-    # Bind the calc function to the age entry box so
+    # Bind the calc function to the birthday, gender, weight_pounds, height_inches, entry box so
     # that the calc function will be called when the
     # user changes the text in the entry box.
     ent_birthday.bind("<KeyRelease>", calc)
@@ -242,7 +230,7 @@ def main_window(frm_main):
     # user clicks the clear button.
     btn_clear.config(command=clear)
 
-    # Give the keyboard focus to the age entry box.
+    # Give the keyboard focus to the entry box.
     ent_birthday.focus()
     ent_gender.focus()
     ent_weight_pounds.focus()
@@ -250,7 +238,7 @@ def main_window(frm_main):
 
 
 # If this file is executed like this:
-# > python heart_rate.py
+# > python GUI_fitness.py
 # then call the main function. However, if this file is simply
 # imported (e.g. into a test file), then skip the call to main.
 if __name__ == "__main__":

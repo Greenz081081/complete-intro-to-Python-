@@ -1,5 +1,5 @@
 import tkinter as tk
-import fitness_num_entry as numy
+# import fitness_num_entry as numy
 from tkinter import *
 from datetime import datetime
 
@@ -47,31 +47,13 @@ def compute_total(sub_t, sales_tr):
 
     return total
 
-def compute_change(p_a, total):
-    sub_change = p_a - total
+def compute_change(pa, total):
+    sub_change = pa - total
     change = sub_change
 
     return change
 
 
-
-
-
-
-
-# The controls in a graphical user interface (GUI) are called widgets,
-# and each widget is an object. Because a GUI has many widgets and each
-# widget is an object, the code to make a GUI usually has many variables
-# to store the many objects. Because there are so many variable names,
-# programmers often adopt a naming convention to help a programmer keep
-# track of all the variables. One popular naming convention is to type a
-# three letter prefix in front of the names of all variables that store
-# GUI widgets, according to this list:
-#
-# frm: a frame (window) widget
-# lbl: a label widget that displays text for the user to see
-# ent: an entry widget where a user will type text or numbers
-# btn: a button widget that the user will click
 
 
 def main_window(frm_main):
@@ -93,9 +75,10 @@ def main_window(frm_main):
     lbl_number_of_children = tk.Label(frm_main, text="How many children are there:")
     lbl_number_of_adults = tk.Label(frm_main, text="How many adults are there:")
     lbl_sales_tax = tk.Label(frm_main, text="What is the sales tax rate:")
-    lbl_payment_amount = tk.Label(frm_main, text="What is the payment amount:")
+    lbl_payment_amount =tk.Label(frm_main, text="What is the payment amount:")
+    
  
-    # Create a string entry box where the user will enter her gender.
+    # Create a string entry box where the user will enter the prices.
     ent_child_meal = Entry(frm_main, width=10)
     ent_adult_meal = Entry(frm_main, width=10)
     ent_child_appetizer = Entry(frm_main, width=10)
@@ -105,15 +88,17 @@ def main_window(frm_main):
     ent_number_of_children = Entry(frm_main, width=10)
     ent_number_adults = Entry(frm_main, width=10)
     ent_sales_tax = Entry(frm_main, width=10)
-    ent_payment_amount = Entry(frm_main, width=10)
+    ent_payment_amount =Entry(frm_main, width=10)
+    
 
 
 
-     # Create a label that displays "Weight in pounds:"
+     # Create a label for displays. 
     lbl_subtotal_text = tk.Label(frm_main, text="Subtotal:")
     lbl_sales_text = tk.Label(frm_main, text="Sales Tax:")
     lbl_total_text = tk.Label(frm_main, text="Total:")
     lbl_change_text = tk.Label(frm_main, text="Change:")
+
  
   
 
@@ -121,7 +106,7 @@ def main_window(frm_main):
     the_subtotal = tk.Label(frm_main, width=6)
     the_sales_tax = tk.Label(frm_main, width=6)
     the_total = tk.Label(frm_main, width=6)
-    the_change = tk.Label(frm_main, width=6)
+    the_change =tk.Label(frm_main, width=6)
     the_time = tk.Label(frm_main, width=20)
     
     
@@ -151,6 +136,7 @@ def main_window(frm_main):
     ent_sales_tax.grid(row=8, column=1, padx=3, pady=3)
     lbl_payment_amount.grid(row=9, column=0, padx=3, pady=3)
     ent_payment_amount.grid(row=9, column=1, padx=3, pady=3)
+    
 
 
 
@@ -160,13 +146,14 @@ def main_window(frm_main):
     lbl_total_text.grid(row=2, column=2, padx=(30,3), pady=3)
     lbl_change_text.grid(row=3, column=2, padx=(30,3), pady=3)
     
+    
 
 
     the_subtotal.grid(row=0, column=3, padx=(30,3), pady=3)
     the_sales_tax.grid(row=1, column=3, padx=(30,3), pady=3)
     the_total.grid(row=2, column=3, padx=(30,3), pady=3)
     the_change.grid(row=3, column=3, padx=(30,3), pady=3)
-    the_time.grid(row=4, column=2, padx=(30,3), pady=3 )
+    the_time.grid(row=5, column=2, padx=(30,3), pady=3 )
 
     
     
@@ -186,22 +173,21 @@ def main_window(frm_main):
             numbers_of_children = int(ent_number_of_children.get())
             numbers_of_adults = int(ent_number_adults.get())
             sales_tax = float(ent_sales_tax.get())
-            payments_amount = float(ent_payment_amount.get())
+            payment_amount = float(ent_payment_amount.get())
+           
           
-                
-       
-
-             
             subtotal = compute_subtotal(childs_meal, childs_appetizer, childs_drink, numbers_of_children, adults_meal, adults_appetizer, adults_drink, numbers_of_adults)
             sales_tax_rate = compute_sales_tax(subtotal, sales_tax)
             total = compute_total(subtotal, sales_tax_rate)
-            change = compute_change(payments_amount, total)
+            change = compute_change(payment_amount, total)
+            
 
             the_subtotal.config(text=f"{subtotal:.2f}")
             the_sales_tax.config(text=f"{sales_tax_rate:.2f}")
             the_total.config(text=f"{total:.2f}")
             the_change.config(text=f"{change:.2f}")
             the_time.config(text=f"{current_date_and_time:%a %b %w %X %Y}")
+
             
 
         except ValueError:
@@ -210,8 +196,9 @@ def main_window(frm_main):
             the_total.config(text="")
             the_change.config(text="")
             
+            
 
-
+    
     # This function will be called each time
     # the user presses the "Clear" button.
     def clear():
@@ -224,8 +211,8 @@ def main_window(frm_main):
         ent_adult_appetizer.delete(0, tk.END)
         ent_number_of_children.delete(0, tk.END)
         ent_number_adults.delete(0, tk.END)
-        ent_payment_amount.delete(0, tk.END)
         ent_sales_tax.delete(0, tk.END)
+        ent_payment_amount.delete(0, tk.END)
         the_subtotal.config(text="")
         the_sales_tax.config(text="")
         the_total.config(text="")
@@ -239,11 +226,11 @@ def main_window(frm_main):
         ent_adult_drink.focus()
         ent_number_of_children.focus()
         ent_number_adults.focus()
-        ent_payment_amount.focus()
         ent_sales_tax.focus()
+        ent_payment_amount.focus()
 
 
-    # Bind the calc function to the age entry box so
+    # Bind the calc function to the entry box so
     # that the calc function will be called when the
     # user changes the text in the entry box.
     ent_child_meal.bind("<KeyRelease>", calc)
@@ -256,6 +243,7 @@ def main_window(frm_main):
     ent_number_adults.bind("<KeyRelease>", calc)
     ent_sales_tax.bind("<KeyRelease>", calc)
     ent_payment_amount.bind("<KeyRelease>", calc)
+    
 
     # Bind the clear function to the clear button so
     # that the clear function will be called when the
@@ -273,6 +261,7 @@ def main_window(frm_main):
     ent_number_adults.focus()
     ent_sales_tax.focus()
     ent_payment_amount.focus()
+    
 
 
 # If this file is executed like this:
