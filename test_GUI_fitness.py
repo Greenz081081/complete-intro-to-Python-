@@ -1,15 +1,15 @@
 from GUI_fitness import compute_age,\
     kg_from_lb, cm_from_in, body_mass_index,\
         basal_metabolic_rate
-from pytest import approx
 import pytest
+from pytest import approx
 
 def test_compute_age():
     """Verify that the compute_age function works correctly."""
-    assert compute_age("2015-10-21") == 6
-    assert compute_age("2019-12-8") == 2
-    assert compute_age("2003-4-6") == 18
-    assert compute_age("2011-7-16") == 10
+    assert compute_age("2015-10-21") == 7
+    assert compute_age("2019-8-8") == 3
+    assert compute_age("2003-4-6") == 19
+    assert compute_age("2011-7-16") == 11
 
 def test_kg_from_lb():
     """Verify that the kb_from_lb function works correctly."""

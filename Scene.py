@@ -12,7 +12,7 @@ def main():
 
     # Create a Frame object.
     frame = tk.Frame(root)
-    frame.master.title("Scene")
+    frame.master.title("Emerald's Scene")
     frame.pack(fill=tk.BOTH, expand=1)
 
     # Create a canvas object that will draw into the frame.
@@ -102,7 +102,7 @@ def draw_scene(canvas, scene_left, scene_top, scene_right, scene_bottom):
     draw_fence_3(canvas, 1082, 450)
     draw_fence_3(canvas, 1082, 550)
     draw_fence_3(canvas, 1082, 650)
-    draw_grid(canvas, scene_left, scene_top, scene_right, scene_bottom, 100)
+    # draw_grid(canvas, scene_left, scene_top, scene_right, scene_bottom, 100)
 
 def draw_sky(canvas, x, y):
     """
